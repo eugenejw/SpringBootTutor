@@ -14,4 +14,5 @@ public class MigrationRequest {
     private String customerId;
     private String sourceCluster;
     private String targetCluster;
+    private String receivedTime;
 }

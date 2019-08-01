@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MigrationJobStatusRequest {
     private String jobId;
+    private String receivedTime;
 }
