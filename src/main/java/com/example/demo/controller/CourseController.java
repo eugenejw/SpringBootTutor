@@ -4,6 +4,7 @@ import com.example.demo.data.MigrationJob;
 import com.example.demo.engine.QueryEngine;
 import com.example.demo.modal.Course;
 import com.example.demo.modal.dto.CourseDto;
+import com.example.demo.query.MigrationJobStatusRequest;
 import com.example.demo.query.MigrationRequest;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.MigrationService;
@@ -60,8 +61,14 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/submit-migration", method = RequestMethod.POST, produces = "application/json")
-    public Callable<ResponseEntity<?>> runQuery(MigrationRequest request) {
+    public Callable<ResponseEntity<?>> submitJob(MigrationRequest request) {
         //LOG.info("runQuery {} tenant:{}", request.getScheme(), tenantId);
         return queryEngine.submitRequest(request);
+    }
+
+    @RequestMapping(value = "/job-status", method = RequestMethod.POST, produces = "application/json")
+    public Callable<ResponseEntity<?>> checkJobStatus(MigrationJobStatusRequest request) {
+        //LOG.info("runQuery {} tenant:{}", request.getScheme(), tenantId);
+        return queryEngine.checkJobStatus(request);
     }
 }
