@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class QueryResult {
     private String jobId;
     private String jobStatus;
+    private String jobReceivedTime;
 }

@@ -8,5 +8,5 @@ import com.example.demo.query.MigrationRequest;
 
 public interface QueryEngine {
     Callable<ResponseEntity<?>> submitRequest(MigrationRequest request);
-    Callable<ResponseEntity<?>> checkJobStatus(MigrationJobStatusRequest request);
+    Callable<ResponseEntity<?>> checkJobStatus(String jobId);
 }

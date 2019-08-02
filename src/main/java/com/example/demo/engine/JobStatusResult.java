@@ -12,4 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobStatusResult {
     private String jobStatus;
+    private String customerId;
+    private int indexCountOnSourceCluster;
+    private int indexCountOnTargetCluster;
 }

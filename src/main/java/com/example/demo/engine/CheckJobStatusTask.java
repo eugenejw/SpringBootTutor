@@ -15,22 +15,24 @@ import com.example.demo.model.MigrationJobStatus;
 public class CheckJobStatusTask implements Callable<ResponseEntity<?>> {
     private static final Logger LOG = LoggerFactory.getLogger(SubmitRequestTask.class);
 
-    private MigrationJobStatusRequest request;
+//    private MigrationJobStatusRequest request;
+    private String jobId;
 
-    public CheckJobStatusTask(MigrationJobStatusRequest request) {
-        this.request = request;
+    public CheckJobStatusTask(String jobId) {
+        this.jobId = jobId;
     }
 
     @Override
     public ResponseEntity<?> call() throws Exception {
-        if (request.getJobId() == null) {
+        if (jobId == null || jobId.length() == 0) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(null);
         }
-        LOG.info("Checking migration job status for job: " + request.getJobId());  // TODO get real status
+        LOG.info("Checking migration job status for job: " + jobId);  // TODO get real status
 
         JobStatusResult result = new JobStatusResult();
+        result.setCustomerId(jobId);
         result.setJobStatus("IN-PROGRESS"); // TODO use ENUM
 
         return ResponseEntity

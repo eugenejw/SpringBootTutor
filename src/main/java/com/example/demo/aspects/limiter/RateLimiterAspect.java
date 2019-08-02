@@ -25,7 +25,7 @@ public class RateLimiterAspect {
     @Around("@annotation(RateLimitIt)")
     public Object limitMethodCalls(ProceedingJoinPoint pjp) throws Throwable {
 
-        String SUBMIT_MIGRATION = "submitRequest";
+        String SUBMIT_MIGRATION = "submitJob";
         String CHECK_STATUS = "checkJobStatus";
         Object retVal;
         String methodName;
@@ -42,12 +42,12 @@ public class RateLimiterAspect {
                     rateLimited = rateLimiter.rateLimitCheckByCustomerId(request.getCustomerId(), startTime);
 
                 } else if (methodName.equals(CHECK_STATUS)) {
-                    MigrationJobStatusRequest request = (MigrationJobStatusRequest) methodParams[0];
-                    rateLimited = rateLimiter.rateLimitCheckByJobId(request.getJobId(), startTime);
+                    String customerId = (String) methodParams[0];
+                    rateLimited = rateLimiter.rateLimitCheckByJobId(customerId, startTime);
                 }
 
                 if (rateLimited) {
-                    throw new RateLimitException("Too many request! Wait for 5 seconds and retry.");
+                    throw new RateLimitException("Too many request! One request per second.");
                 }
 
             } catch (RateLimitException e) {

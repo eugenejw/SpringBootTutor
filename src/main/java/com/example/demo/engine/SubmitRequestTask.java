@@ -27,6 +27,7 @@ public class SubmitRequestTask implements Callable<ResponseEntity<?>> {
         QueryResult result = new QueryResult();
         result.setJobId(request.getCustomerId());
         result.setJobStatus("SUBMITTED"); // TODO use ENUM
+        result.setJobReceivedTime(request.getReceivedTime());
 
         return ResponseEntity
                 .status(HttpStatus.OK)
