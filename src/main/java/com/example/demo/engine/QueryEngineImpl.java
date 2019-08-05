@@ -25,7 +25,7 @@ public class QueryEngineImpl implements QueryEngine {
     }
 
     public Callable<ResponseEntity<?>> checkJobStatus(String jobId) {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         Callable<ResponseEntity<?>> task = new CheckJobStatusTask(jobId);
 
         return task;
