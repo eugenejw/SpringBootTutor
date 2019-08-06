@@ -20,7 +20,7 @@ public class SimpleMongoConfig {
     @Bean("indexMgrMongo")
     public MongoTemplate mongoTemplate() throws Exception {
         try {
-            return new MongoTemplate(testMongo(), "terbium_dev");
+            return new MongoTemplate(testMongo(), "CrossClusterTenantMapping");
         } catch (Exception e){
 
         }
@@ -28,4 +28,5 @@ public class SimpleMongoConfig {
         return null;
 
     }
+
 }

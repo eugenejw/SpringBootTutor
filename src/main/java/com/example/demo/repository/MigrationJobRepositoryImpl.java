@@ -4,6 +4,7 @@ import com.example.demo.data.MigrationJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -42,15 +43,51 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
 
     }
 
+
+    private MigrationJob jobOrmToJobHttp (CrossClusterNameMapping jobOrm) {
+        String status = "PREPARING";
+        status = jobOrm.isMigrationPreparationFinished() ? "READY" : status;
+        status = jobOrm.isMigrationCompleted() ? "COMPLETED" : status;
+        MigrationJob job = new MigrationJob().builder()
+                .customerId(jobOrm.getTenantId())
+                .sourceCluster(jobOrm.getSourceCluster())
+                .targetCluster(jobOrm.getTargetCluster())
+                .jobStatus(status)
+                .build();
+
+        return job;
+    }
+
     public List<MigrationJob> getAllMigrationjobs() {
         Query query = new Query();
 
+        List<MigrationJob> jobs = new ArrayList<>();
         try {
-            LOG.info("MongoDB test: " + simpleMongoConfig.mongoTemplate().getCollectionNames());
+            LOG.info("MongoDB dbs name: " + simpleMongoConfig.mongoTemplate().getCollectionNames());
+
+            List<CrossClusterNameMapping> allJobs = simpleMongoConfig.mongoTemplate().findAll(CrossClusterNameMapping.class, "crossClusterNameMapping");
+            LOG.info("Doc size: " + allJobs.size());
+            for (CrossClusterNameMapping job : allJobs) {
+                LOG.info("Found document: " + job);
+                jobs.add(jobOrmToJobHttp(job));
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return jobList;
+//        try {
+//            LOG.info("MongoDB dbs name: " + simpleMongoConfig.mongoTemplate().getCollectionNames());
+//
+//            List<CrossClusterNameMapping> allJobs = simpleMongoConfig.mongoTemplate().findAll(CrossClusterNameMapping.class, "crossClusterNameMapping");
+//            LOG.info("Doc size: " + allJobs.size());
+//            for (CrossClusterNameMapping job : allJobs) {
+//                LOG.info("Found document: " + job);
+//
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        return jobs;
     }
     public List<MigrationJob> getAllInprogressjobs() {
         return jobList;
