@@ -49,7 +49,7 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
         status = jobOrm.isMigrationPreparationFinished() ? "READY" : status;
         status = jobOrm.isMigrationCompleted() ? "COMPLETED" : status;
         MigrationJob job = new MigrationJob().builder()
-                .customerId(jobOrm.getTenantId())
+                .customerId(jobOrm.getTenantID())
                 .sourceCluster(jobOrm.getSourceCluster())
                 .targetCluster(jobOrm.getTargetCluster())
                 .jobStatus(status)

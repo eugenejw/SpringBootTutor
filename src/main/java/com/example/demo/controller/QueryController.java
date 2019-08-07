@@ -7,6 +7,7 @@ import com.example.demo.query.MigrationRequest;
 import com.example.demo.service.MigrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,16 @@ public class QueryController {
         List<MigrationJob> allMigrationJobs = migrationService.getAllMigrationjobs();
 
         return new ResponseEntity<>(allMigrationJobs, HttpStatus.OK);
+
+
     }
+
+//    @GetMapping(path = "/api/v1/migration-request/debug", produces = "application/json")
+//    public ResponseEntity<List<MigrationJob>> findAllMigrationJobs(){
+//        List<MigrationJob> allMigrationJobs = migrationService.getAllMigrationjobs();
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.set("Access-Control-Allow-Origin","*");
+//        return ResponseEntity.ok()
+//                .headers(responseHeaders)
+//                .body(allMigrationJobs);}
 }

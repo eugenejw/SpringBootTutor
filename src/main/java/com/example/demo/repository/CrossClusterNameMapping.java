@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CrossClusterNameMapping {
-    private String tenantId;
+    private String tenantID;
     private String sourceCluster;
     private String targetCluster;
     private boolean migrationRequestReceived;
