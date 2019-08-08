@@ -49,4 +49,13 @@ public class QueryController {
           .headers(responseHeaders)
           .body(allMigrationJobs);
     }
+
+//    @GetMapping(path = "/api/v1/migration-request/debug", produces = "application/json")
+//    public ResponseEntity<List<MigrationJob>> findAllMigrationJobs(){
+//        List<MigrationJob> allMigrationJobs = migrationService.getAllMigrationjobs();
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.set("Access-Control-Allow-Origin","*");
+//        return ResponseEntity.ok()
+//                .headers(responseHeaders)
+//                .body(allMigrationJobs);}
 }

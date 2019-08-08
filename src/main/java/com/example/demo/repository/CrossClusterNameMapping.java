@@ -1,4 +1,4 @@
-package com.example.demo.data;
+package com.example.demo.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MigrationJob {
-    private String customerId;
+public class CrossClusterNameMapping {
+    private String tenantID;
     private String sourceCluster;
     private String targetCluster;
-    private String jobStatus;
-    private int indexCountOnSourceCluster;
-    private int indexCountOnTargetCluster;
     private boolean migrationRequestReceived;
     private boolean migrationPreparationFinished;
     private boolean migrationCompleted;
