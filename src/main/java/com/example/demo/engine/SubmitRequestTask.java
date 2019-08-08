@@ -3,6 +3,7 @@ package com.example.demo.engine;
 import com.example.demo.query.MigrationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -28,9 +29,11 @@ public class SubmitRequestTask implements Callable<ResponseEntity<?>> {
         result.setJobId(request.getCustomerId());
         result.setJobStatus("SUBMITTED"); // TODO use ENUM
         result.setJobReceivedTime(request.getReceivedTime());
-
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin","*");     
         return ResponseEntity
-                .status(HttpStatus.OK)
+        		.ok()
+                .headers(responseHeaders)
                 .body(result);
     }
 }
