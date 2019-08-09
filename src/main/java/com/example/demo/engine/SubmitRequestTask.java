@@ -29,6 +29,9 @@ public class SubmitRequestTask implements Callable<ResponseEntity<?>> {
         result.setJobId(request.getCustomerId());
         result.setJobStatus("SUBMITTED"); // TODO use ENUM
         result.setJobReceivedTime(request.getReceivedTime());
+        result.setCustomerId(request.getCustomerId());
+        result.setSourceCluster(request.getSourceCluster());
+        result.setTargetCluster(request.getTargetCluster());
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Access-Control-Allow-Origin","*");     
         return ResponseEntity

@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QueryResult {
     private String jobId;
+    private String customerId;
+    private String sourceCluster;
+    private String targetCluster;
     private String jobStatus;
     private String jobReceivedTime;
 }
