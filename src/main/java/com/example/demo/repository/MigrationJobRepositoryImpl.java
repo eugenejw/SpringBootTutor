@@ -18,6 +18,7 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
     private List<MigrationJob> jobList;
     private static final Logger LOG = LoggerFactory.getLogger(MigrationJobRepositoryImpl.class);
     @Autowired SimpleMongoConfig simpleMongoConfig;
+    @Autowired RedisTestRepository redisTestRepository;
 
     public MigrationJobRepositoryImpl() {
         jobList = new ArrayList<MigrationJob>();
@@ -72,6 +73,12 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
                 jobs.add(jobOrmToJobHttp(job));
 
             }
+
+            RedisTest testItem = new RedisTest("fake_id", "fake_name");
+            redisTestRepository.save(testItem);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
