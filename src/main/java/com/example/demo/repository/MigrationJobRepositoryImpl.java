@@ -19,6 +19,7 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
     private static final Logger LOG = LoggerFactory.getLogger(MigrationJobRepositoryImpl.class);
     @Autowired SimpleMongoConfig simpleMongoConfig;
     @Autowired RedisTestRepository redisTestRepository;
+    @Autowired RedisListRepository redisListRepository;
 
     public MigrationJobRepositoryImpl() {
         jobList = new ArrayList<MigrationJob>();
@@ -76,7 +77,7 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
 
             RedisTest testItem = new RedisTest("fake_id", "fake_name");
             redisTestRepository.save(testItem);
-
+//            redisListRepository.lPush("Hey");
 
 
         } catch (Exception e) {
