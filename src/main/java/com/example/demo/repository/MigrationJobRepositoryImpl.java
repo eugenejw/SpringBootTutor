@@ -19,7 +19,7 @@ public class MigrationJobRepositoryImpl implements MigrationJobRepository {
     private static final Logger LOG = LoggerFactory.getLogger(MigrationJobRepositoryImpl.class);
     @Autowired SimpleMongoConfig simpleMongoConfig;
     @Autowired RedisTestRepository redisTestRepository;
-    @Autowired RedisListRepository redisListRepository;
+//    @Autowired RedisListRepository redisListRepository;
 
     public MigrationJobRepositoryImpl() {
         jobList = new ArrayList<MigrationJob>();
